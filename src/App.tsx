@@ -1,8 +1,10 @@
 import './App.css'
-import LandingPage from './pages/LandingPage'
+import CapturePage from './pages/DocumentsUpload/CameraCapture'
 
 export default function App() {
   return (
-    <LandingPage />
+    <div className="App">
+      <CapturePage />
+    </div>
   )
 }
