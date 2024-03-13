@@ -1,10 +1,9 @@
-import "./App.css";
-// import CapturePage from "./pages/DocumentsUpload/CameraCapture";
-import Progress from "./components/ProgressBar";
+import './App.css'
+import LoginPage from './pages/Login/Login'
 export default function App() {
   return (
     <div className="App">
-      <Progress />
+      <LoginPage />
     </div>
   );
 }
