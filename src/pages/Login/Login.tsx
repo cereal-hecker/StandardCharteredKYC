@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginPage.css'; // Make sure this path is correct
+import { doSignInWithPhoneNumber } from '../../firebase/auth'
 import OtpInputWithValidation from '../../components/otpInputBox/otpInput';
 
 const LoginPage = () => {
