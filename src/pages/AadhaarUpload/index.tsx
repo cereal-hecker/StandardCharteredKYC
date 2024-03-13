@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
 
-const CapturePage: React.FC = () => {
+const AadhaarPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
@@ -84,4 +84,4 @@ const CapturePage: React.FC = () => {
   );
 };
 
-export default CapturePage;
+export default AadhaarPage;

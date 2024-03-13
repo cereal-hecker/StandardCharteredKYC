@@ -2,14 +2,14 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
 
-const CapturePage: React.FC = () => {
+const PanPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSaveAndContinue = () => {
-    navigate('/pancard');
+    navigate('/signature');
   };
 
   const handleCapture = () => {
@@ -67,8 +67,8 @@ const CapturePage: React.FC = () => {
       </div>
     </div>
     <div className='w-1/2'>
-    <h1 className="text-4xl font-bold mb-4">Aadhaar Card Upload</h1>
-      <h2 className="mx-auto">Place your aadhaar card inside the rectangle</h2>
+    <h1 className="text-4xl font-bold mb-4">Pan Card Upload</h1>
+      <h2 className="mx-auto">Place your pan card inside the rectangle</h2>
       <div className="flex flex-col gap-2 mt-20">
           {capturedImage ? (
             <>
@@ -84,4 +84,4 @@ const CapturePage: React.FC = () => {
   );
 };
 
-export default CapturePage;
+export default PanPage;

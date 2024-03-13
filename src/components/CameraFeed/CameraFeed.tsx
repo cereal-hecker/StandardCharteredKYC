@@ -1,7 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, RefObject } from 'react';
 
-const CameraFeed = ({ videoRef }) => {
-  const localVideoRef = useRef(null);
+interface CameraFeedProps {
+  videoRef?: RefObject<HTMLVideoElement>;
+}
+
+const CameraFeed: React.FC<CameraFeedProps> = ({ videoRef }) => {
+  const localVideoRef = useRef<HTMLVideoElement>(null);
   const usedVideoRef = videoRef || localVideoRef; // Use passed ref if available
 
   useEffect(() => {
@@ -21,8 +25,8 @@ const CameraFeed = ({ videoRef }) => {
   }, [usedVideoRef]);
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
-      <video ref={usedVideoRef} style={{ width: '100%' }}></video>
+    <div className='relative'>
+      <video ref={usedVideoRef}></video>
       <div style={{
         position: 'absolute',
         top: '10%', // Adjust these values as needed

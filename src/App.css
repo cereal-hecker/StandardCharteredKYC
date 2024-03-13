@@ -25,4 +25,5 @@
 
 body {
   @apply font-body;
+  background: #F5F6F8;
 }
