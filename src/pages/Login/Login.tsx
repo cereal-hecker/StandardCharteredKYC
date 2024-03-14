@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './LoginPage.css'; // Make sure this path is correct
-import { doSignInWithPhoneNumber } from '../../firebase/auth'
+import { doSignInWithPhoneNumber } from '../firebase/auth'
 import OtpInputWithValidation from '../../components/otpInputBox/otpInput';
-import firebaseApp from '../../components/Firebase/firebaseCofig';
-import firebase from "firebase"
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import {auth} from "../firebase/firebase";
+
 
 const LoginPage = () => {
   const [isOtpStep, setIsOtpStep] = useState(false);
@@ -13,7 +14,7 @@ const LoginPage = () => {
 
   //firebase integration for login authentication
   useEffect(()=>{
-    window.recaptchaVerifier = new firebase.auth.RecapthaVerifier(
+    window.recaptchaVerifier = new RecaptchaVerifier(
       "recaptcha-container",
       { "size": "invisible" }
     );
@@ -29,9 +30,7 @@ const LoginPage = () => {
     // Simple validation for a 10-digit phone number
     if (validatePhone()) {
       const appVerifier = window.recaptchaVerfier;
-      firebase
-      .auth()
-      .signInWithPhoneNumber(userInput, appVerifier)
+      signInWithPhoneNumber(auth, userInput, appVerifier)
       .then(value => {
         
       })
