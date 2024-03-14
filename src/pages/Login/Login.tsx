@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './LoginPage.css'; // Make sure this path is correct
-import { doSignInWithPhoneNumber } from '../firebase/auth'
 
 import { RecaptchaVerifier, signInWithPhoneNumber, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import {auth} from "../firebase/firebase";
@@ -10,16 +9,7 @@ const LoginPage = () => {
   const [IsPasswordStep, setIsPasswordStep] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checkOtp, setCheckOtp] = useState(false);
   const [phoneError, setPhoneError] = useState('');
-
-  //firebase integration for login authentication
-  // useEffect(()=>{
-  //   window.recaptchaVerifier = new RecaptchaVerifier(
-  //     "recaptcha-container",
-  //     { "size": "invisible" }
-  //   );
-  // },[]);
 
   const handlePhoneNumberSubmit = async (e) => {
     e.preventDefault();
