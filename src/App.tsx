@@ -11,15 +11,29 @@ export default function App() {
   return (
     <Router>
       <div className="App">
-        <Progress />
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/personaldetails" element={<PersonalDetails />} />
-          <Route path="/aadharcard" element={<AadhaarUpload />} />
-          <Route path="/pancard" element={<PanPage />} />
-          <Route path="/signature" element={<SignaturePage />} />
-
-          {/* <Route path="/login" element={<LoginPage />} /> */}
+          <Route
+            path="/"
+            element={
+              <>
+                <LoginPage />
+              </>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <>
+                <Progress />
+                <Routes>
+                  <Route path="/personaldetails" element={<PersonalDetails />} />
+                  <Route path="/aadharcard" element={<AadhaarUpload />} />
+                  <Route path="/pancard" element={<PanPage />} />
+                  <Route path="/signature" element={<SignaturePage />} />
+                </Routes>
+              </>
+            }
+          />
         </Routes>
       </div>
     </Router>

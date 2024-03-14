@@ -14,7 +14,7 @@ const Progress = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const location = useLocation();
-
+  console.log(setComplete)
   useEffect(() => {
     const path = location.pathname;
     const currentStepIndex = steps.findIndex((step) => path.includes(step.toLowerCase().replace(/\s+/g, '')));
