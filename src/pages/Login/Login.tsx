@@ -5,8 +5,12 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+import '../../components/Translations/translations';
+import { useTranslation } from 'react-i18next';
 
 const LoginPage = () => {
+  const { t } = useTranslation();
+
   const [IsPasswordStep, setIsPasswordStep] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +47,7 @@ const LoginPage = () => {
             />
           </div>
           <h1 className="text-3xl font-bold mt-4">
-            Your portal for Online KYC
+          {t('Your portal for Online KYC')}
           </h1>
           <img
             src="/assets/images/video.png"
@@ -57,7 +61,7 @@ const LoginPage = () => {
         >
           {IsPasswordStep ? (
             <div>
-              <h1 className="text-xl font-bold">Enter Your Password</h1>
+              <h1 className="text-xl font-bold">{t('Enter Your Password')}</h1>
               <input
                 type="password"
                 id="password"
@@ -69,7 +73,7 @@ const LoginPage = () => {
             </div>
           ) : (
             <div>
-              <h1 className="text-xl font-bold">Enter Your Email</h1>
+              <h1 className="text-xl font-bold">{t('Enter Your Email')}</h1>
               <input
                 type="email"
                 id="email"
@@ -86,7 +90,7 @@ const LoginPage = () => {
             type="submit"
             className="mt-4 py-2 px-4 bg-blue-600 text-white font-semibold rounded-md"
           >
-            {IsPasswordStep ? "Login" : "Continue"}
+            {IsPasswordStep ? t("Login") : t("Continue")}
           </button>
         </form>
       </div>

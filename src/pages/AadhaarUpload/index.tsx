@@ -85,15 +85,15 @@ const AadhaarPage: React.FC = () => {
     </div>
     <div className='w-1/2'>
     <h1 className="text-4xl font-bold mb-4">{t('Aadhaar Card Upload')}</h1>
-      <h2 className="mx-auto">Place your aadhaar card inside the rectangle</h2>
+      <h2 className="mx-auto">{t('Place your aadhaar card inside the rectangle')}</h2>
       <div className="flex flex-col gap-2 mt-20">
           {capturedImage ? (
             <>
-              <button onClick={handleRetake} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Retake</button>
-              <button onClick={handleSaveAndContinue} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save and continue</button>
+              <button onClick={handleRetake} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{t('Retake')}</button>
+              <button onClick={handleSaveAndContinue} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{t('Save and continue')}</button>
             </>
           ) : (
-            <button onClick={handleCapture} className="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Capture Frame</button>
+            <button onClick={handleCapture} className="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{t('Capture Frame')}</button>
           )}
         </div>
       </div>
