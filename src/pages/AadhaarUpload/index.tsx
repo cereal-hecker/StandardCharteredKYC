@@ -9,6 +9,10 @@ const AadhaarPage: React.FC = () => {
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const handleSaveAndContinue = () => {
+    navigate('/pancard');
+  };
+
   useEffect(() => {
     if (capturedImage) {
       extractTextAndSearchPattern(capturedImage)
@@ -20,9 +24,7 @@ const AadhaarPage: React.FC = () => {
   }, [capturedImage]);
 
 
-  const handleSaveAndContinue = () => {
-    navigate('/pancard');
-  };
+  
 
   const handleCapture = () => {
     const video = videoRef.current;

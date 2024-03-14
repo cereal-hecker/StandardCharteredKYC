@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import TextFieldCustom from '../../components/TextField';
+import TranslateButton from '../../components/Translations/translateButton';
+import '../../components/Translations/translations';
 
 export default function PersonalDetails() {
+    const { t } = useTranslation();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -22,44 +26,47 @@ export default function PersonalDetails() {
                 <img src="/assets/images/Rafiki.png" alt="logo" />
             </div>
             <div className="w-1/2">
-                <h1 className="text-4xl font-bold mb-16">Personal Details</h1>
+                <h1 className="text-4xl font-bold mb-16">{t('Personal Details')}</h1>
                 <div className="grid grid-cols-2 gap-4">
                     <TextFieldCustom
-                        heading="Enter your first name"
+                        heading={t('Enter your first name')}
                         variableName="firstName"
                         value={firstName}
                         onChange={e => setFirstName(e.target.value)}
                         placeholder="John"
                     />
                     <TextFieldCustom
-                        heading="Enter your last name"
+                        heading={t('Enter your last name')}
                         variableName="lastName"
                         value={lastName}
                         onChange={e => setLastName(e.target.value)}
                         placeholder="Doe"
                     />
                     <TextFieldCustom
-                        heading="Enter your email"
+                        heading={t('Enter your email')}
                         variableName="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         placeholder="johndoe72@gmail.com"
                     />
                     <TextFieldCustom
-  heading="Enter your phone number"
-  variableName="phoneNumber"
-  value={phoneNumber}
-  onChange={e => setPhoneNumber(e.target.value)}
-  placeholder="123-456-7890"
-/>
+                        heading={t('Enter your phone number')}
+                        variableName="phoneNumber"
+                        value={phoneNumber}
+                        onChange={e => setPhoneNumber(e.target.value)}
+                        placeholder="123-456-7890"
+                    />
                 </div>
-                <button
-                    type="button"
-                    className="mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                    onClick={handleSaveAndContinue}
-                >
-                    Save & Continue
-                </button>
+                <div className="flex justify-between items-center mt-5">
+                  <TranslateButton />
+                  <button
+                      type="button"
+                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      onClick={handleSaveAndContinue}
+                  >
+                      {t('Save & Continue')}
+                  </button>
+                </div>
             </div>
         </div>
     );

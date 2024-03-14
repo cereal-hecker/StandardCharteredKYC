@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phoneError, setPhoneError] = useState('');
+  const navigate = useNavigate();
 
 
   const handlePhoneNumberSubmit = async (e) => {
@@ -27,8 +28,7 @@ const LoginPage = () => {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("New Account Created!");
     }
-
-
+    navigate('/')
   };
 
   return (
