@@ -5,6 +5,7 @@ import AadhaarUpload from './pages/AadhaarUpload';
 import PanPage from './pages/PanUpload';
 import SignaturePage from './pages/SignatureUpload';
 import LoginPage from './pages/Login/Login';
+import DonePage from './pages/DonePage';
 import './App.css';
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
                   <Route path="/aadharcard" element={<AadhaarUpload />} />
                   <Route path="/pancard" element={<PanPage />} />
                   <Route path="/signature" element={<SignaturePage />} />
+                  <Route path="/done" element={<DonePage />} />
                 </Routes>
               </>
             }

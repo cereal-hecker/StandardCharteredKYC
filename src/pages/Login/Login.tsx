@@ -7,6 +7,7 @@ import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import '../../components/Translations/translations';
 import { useTranslation } from 'react-i18next';
+import TranslateButton from '../../components/Translations/translateButton';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -36,15 +37,29 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 flex flex-col items-center min-h-screen h-screen">
+    <div className="bg-gray-100 flex flex-col items-center min-h-screen w-full h-screen">
+<div className="w-full bg-green-100 flex h-16 justify-between items-center">
+  <div className="flex items-center my-10">
+    <img
+      src="/assets/images/logo.svg"
+      alt="Standard Chartered"
+      className="h-12 pl-10"
+    />
+  </div>
+  <div className="text-right h-16"> {/* Added flex-grow and text-right classes */}
+    <TranslateButton />
+  </div>
+</div>
+
+
       <div className="flex flex-col md:flex-row md:space-x-8 w-full h-full">
         <div className="w-1/2 bg-blue-200 h-full flex flex-col justify-center items-center">
         <div className="mt-10 mb-8 top-0 left-0">
-            <img
+            {/* <img
               src="/assets/images/logo.svg"
               alt="Standard Chartered"
               className="h-12"
-            />
+            /> */}
           </div>
           <h1 className="text-3xl font-bold mt-4">
           {t('Your portal for Online KYC')}

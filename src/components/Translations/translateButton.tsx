@@ -14,7 +14,7 @@ export default function TranslateButton() {
     <button onClick={toggleLanguage} style={styles.button}>
       <img 
         style={styles.translate}
-        src="/assets/images/language-solid.svg"
+        src="/assets/images/Translate.png"
         alt="Translate"
       />
     </button>
@@ -23,10 +23,10 @@ export default function TranslateButton() {
 
 const styles = {
   button: {
-    width: '10%', 
+    width: '20%', 
     height: 'auto', 
-    padding: '10px', 
     border: 'none', 
+    paddingRight: '30px',
     backgroundColor: 'transparent', 
     cursor: 'pointer' 
   },
