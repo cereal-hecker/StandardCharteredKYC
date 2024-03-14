@@ -13,7 +13,7 @@ export default function PersonalDetails() {
         console.log("First Name:", firstName);
         console.log("Last Name:", lastName);
         console.log("Email:", email);
-        navigate('/aadhaar');
+        navigate('/aadharcard');
     };
 
     return (

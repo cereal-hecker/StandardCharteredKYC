@@ -5,6 +5,7 @@ import PersonalDetails from './pages/PersonalDetails';
 import AadhaarUpload from './pages/AadhaarUpload';
 import PanPage from './pages/PanUpload';
 import SignaturePage from './pages/SignatureUpload';
+import LoginPage from './pages/Login/Login';
 import './App.css';
 
 export default function App() {
@@ -14,9 +15,11 @@ export default function App() {
         <Progress />
         <Routes>
           <Route path="/" element={<PersonalDetails />} />
-          <Route path="/aadhaar" element={<AadhaarUpload />} />
+          <Route path="/aadharcard" element={<AadhaarUpload />} />
           <Route path="/pancard" element={<PanPage />} />
           <Route path="/signature" element={<SignaturePage />} />
+
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>
     </Router>
