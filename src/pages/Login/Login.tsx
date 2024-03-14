@@ -18,6 +18,9 @@ const LoginPage = () => {
   const [phoneError, setPhoneError] = useState("");
   const navigate = useNavigate();
 
+  if (auth.currentUser != null)
+  navigate("/personaldetails");
+
   const handlePhoneNumberSubmit = async (e) => {
     e.preventDefault();
     setIsPasswordStep(true);
@@ -25,6 +28,7 @@ const LoginPage = () => {
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
+    
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
       console.log("Logged In Successfully");
