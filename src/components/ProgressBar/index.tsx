@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import "./progress.css";
 import { TiTick } from "react-icons/ti";
+import TranslateButton from '../../components/Translations/translateButton';
 
 const Progress = () => {
   const steps = [
@@ -42,6 +43,8 @@ const Progress = () => {
             <Link to={`/${step.toLowerCase().replace(/\s+/g, '')}`} className="text-gray-500">{step}</Link>
           </div>
         ))}
+              <TranslateButton />
+
       </div>
       {/* {!complete && (
         <button

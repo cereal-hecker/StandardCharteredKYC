@@ -2,38 +2,36 @@ import React, { useState } from 'react';
 import i18n from 'i18next';
 
 export default function TranslateButton() {
-  const [language, setLanguage] = useState(i18n.language); // Initial language
+  const [language, setLanguage] = useState(i18n.language);
 
   const toggleLanguage = () => {
-    const newLanguage = language === 'en' ? 'hi' : 'en'; // Toggle between 'en' and 'hi'
+    const newLanguage = language === 'en' ? 'hi' : 'en';
     setLanguage(newLanguage);
-    i18n.changeLanguage(newLanguage); // Change the app's language
+    i18n.changeLanguage(newLanguage);
   };
 
   return (
     <button onClick={toggleLanguage} style={styles.button}>
-        Translate button
-      {/* <img 
+      <img 
         style={styles.translate}
-        src={require("../assets/images/translate.png")} // Adjust this path as needed
+        src="/assets/images/language-solid.svg"
         alt="Translate"
-      /> */}
+      />
     </button>
   );
 }
 
-// Adjusted for web usage
 const styles = {
   button: {
-    width: '10%', // Example width, adjust as needed
-    height: 'auto', // Adjust based on content or explicitly
-    padding: '10px', // Add some padding
-    border: 'none', // Remove border
-    backgroundColor: 'transparent', // Transparent background
-    cursor: 'pointer' // Pointer cursor on hover
+    width: '10%', 
+    height: 'auto', 
+    padding: '10px', 
+    border: 'none', 
+    backgroundColor: 'transparent', 
+    cursor: 'pointer' 
   },
   translate: {
-    width: '100%', // Make the image fill the button
-    height: 'auto' // Keep image aspect ratio
+    width: '100%', 
+    height: 'auto' 
   },
 };

@@ -12,7 +12,7 @@ export default function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route
+          <Route 
             path="/"
             element={
               <>
