@@ -1,6 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
+import '../../components/Translations/translations';
+import { useTranslation } from 'react-i18next';
+import {app, auth} from "../firebase/firebase";
+import {getDoc, doc, setDoc, getFirestore} from "firebase/firestore";
+
+const db = getFirestore(app);
 
 const SignaturePage: React.FC = () => {
   const { t } = useTranslation();
@@ -41,7 +47,7 @@ const SignaturePage: React.FC = () => {
         var docSnap:any = await getDoc(docPrev);
         var curr = (await docSnap.data()) || {};
         setCapturedImage(imageDataUrl);
-        curr["image"] = capturedImage
+        curr["image"] = imageDataUrl;
         await setDoc(doc(db, "PersonalDetails", data.email), curr);
       }
     }

@@ -1,7 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
-import extractTextAndSearchPattern from '../../components/OCR/ocr'
+import extractTextAndSearchPattern from '../../components/OCR/ocr';
+import '../../components/Translations/translations';
+import { useTranslation } from 'react-i18next';
+import {app, auth} from "../firebase/firebase";
+import {getDoc, doc, setDoc, getFirestore} from "firebase/firestore";
+
+const db = getFirestore(app);
 
 const PanPage: React.FC = () => {
   const { t } = useTranslation();
