@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
 import extractTextAndSearchPattern from '../../components/OCR/ocr'
+import '../../components/Translations/translations';
+import { useTranslation } from 'react-i18next';
 
 const AadhaarPage: React.FC = () => {
+  const { t } = useTranslation();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
@@ -81,7 +84,7 @@ const AadhaarPage: React.FC = () => {
       </div>
     </div>
     <div className='w-1/2'>
-    <h1 className="text-4xl font-bold mb-4">Aadhaar Card Upload</h1>
+    <h1 className="text-4xl font-bold mb-4">{t('Aadhaar Card Upload')}</h1>
       <h2 className="mx-auto">Place your aadhaar card inside the rectangle</h2>
       <div className="flex flex-col gap-2 mt-20">
           {capturedImage ? (
