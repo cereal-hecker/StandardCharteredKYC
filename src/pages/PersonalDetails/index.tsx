@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import TextFieldCustom from '../../components/TextField';
 import '../../components/Translations/translations';
+import {auth} from "../firebase/firebase";
 
 export default function PersonalDetails() {
     const { t } = useTranslation();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(auth.currentUser.email);
     const [phoneNumber, setPhoneNumber] = useState('');
     const navigate = useNavigate();
 

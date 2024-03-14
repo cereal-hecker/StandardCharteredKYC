@@ -18,6 +18,8 @@ const PanPage: React.FC = () => {
   const navigate = useNavigate();
   const [ocrError, setOcrError] = useState(false);
 
+  var data = auth.currentUser;
+
   const handleSaveAndContinue = () => {
     navigate('/signature');
   };

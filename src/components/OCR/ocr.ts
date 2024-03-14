@@ -22,7 +22,7 @@ const extractTextAndSearchPattern = (imagePath, option) => {
       if (search) {
         resolve(search[0]);
       } else {
-        reject("No Aadhaar number found.");
+        reject(`No ${option} number found`);
       }
     }).catch(error => {
       reject(error);
