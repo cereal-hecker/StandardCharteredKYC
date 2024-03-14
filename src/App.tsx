@@ -19,7 +19,7 @@ export default function App() {
           <Route path="/pancard" element={<PanPage />} />
           <Route path="/signature" element={<SignaturePage />} />
 
-          <Route path="/login" element={<LoginPage />} />
+          {/* <Route path="/login" element={<LoginPage />} /> */}
         </Routes>
       </div>
     </Router>

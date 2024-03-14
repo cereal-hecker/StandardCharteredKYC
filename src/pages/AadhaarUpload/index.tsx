@@ -1,12 +1,24 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
+import extractTextAndSearchPattern from '../../components/OCR/ocr'
 
 const AadhaarPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (capturedImage) {
+      extractTextAndSearchPattern(capturedImage)
+        .then(matchedText => {
+          console.log("Matched Text:", matchedText);
+        })
+        .catch(error => console.error("Error:", error));
+    }
+  }, [capturedImage]);
+
 
   const handleSaveAndContinue = () => {
     navigate('/pancard');
