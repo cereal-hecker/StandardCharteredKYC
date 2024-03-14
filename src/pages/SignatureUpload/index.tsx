@@ -18,7 +18,7 @@ const SignaturePage: React.FC = () => {
   
   const data = auth.currentUser
   const handleSaveAndContinue = () => {
-    navigate('/signature');
+    navigate('/done');
   };
 
   const handleCapture = async () => {
