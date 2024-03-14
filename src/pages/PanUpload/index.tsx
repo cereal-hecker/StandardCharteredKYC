@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
+import extractTextAndSearchPattern from '../../components/OCR/ocr'
 
 const PanPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -11,6 +12,15 @@ const PanPage: React.FC = () => {
   const handleSaveAndContinue = () => {
     navigate('/signature');
   };
+  useEffect(() => {
+    if (capturedImage) {
+      extractTextAndSearchPattern(capturedImage, "pan")
+        .then(matchedText => {
+          console.log("Matched Text:", matchedText);
+        })
+        .catch(error => console.error("Error:", error));
+    }
+  }, [capturedImage]);
 
   const handleCapture = () => {
     const video = videoRef.current;

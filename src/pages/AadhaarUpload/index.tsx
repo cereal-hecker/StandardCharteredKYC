@@ -18,7 +18,7 @@ const AadhaarPage: React.FC = () => {
 
   useEffect(() => {
     if (capturedImage) {
-      extractTextAndSearchPattern(capturedImage)
+      extractTextAndSearchPattern(capturedImage, "aadhar")
         .then(matchedText => {
           console.log("Matched Text:", matchedText);
         })

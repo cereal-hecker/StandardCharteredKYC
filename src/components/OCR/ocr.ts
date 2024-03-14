@@ -1,11 +1,17 @@
 import Tesseract from 'tesseract.js';
 
-const extractTextAndSearchPattern = (imagePath) => {
-  const pattern = /\d{4} \d{4} \d{4}/;
+
+const extractTextAndSearchPattern = (imagePath, option) => {
+
+  const patterns = {
+    "aadhar": /\d{4} \d{4} \d{4}/,
+    "pan": /\w{5}\d{4}\w{1}/
+  }
+  const pattern = patterns[option];
 
   return new Promise((resolve, reject) => {
     Tesseract.recognize(
-      imagePath, 
+      imagePath,
       'eng',
       {
         logger: m => console.log(m)
