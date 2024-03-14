@@ -4,6 +4,10 @@ import CameraFeed from '../../components/CameraFeed/CameraFeed';
 import extractTextAndSearchPattern from '../../components/OCR/ocr'
 import '../../components/Translations/translations';
 import { useTranslation } from 'react-i18next';
+import {app, auth} from "../firebase/firebase";
+import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
+
+const db = getFirestore(app);
 
 const AadhaarPage: React.FC = () => {
   const { t } = useTranslation();
@@ -15,12 +19,20 @@ const AadhaarPage: React.FC = () => {
   const handleSaveAndContinue = () => {
     navigate('/pancard');
   };
+  const data = auth.currentUser
+  console.log(data);
 
   useEffect(() => {
     if (capturedImage) {
       extractTextAndSearchPattern(capturedImage, "aadhar")
-        .then(matchedText => {
+        .then(async (matchedText) => {
           console.log("Matched Text:", matchedText);
+          const docPrev = doc(db, "PersonalDetails", data.email);
+          var docSnap:any = await getDoc(docPrev);
+          var curr = (await docSnap.data()) || {};
+          curr["aadhar_card"] = matchedText
+          await setDoc(doc(db, "PersonalDetails", data.email), curr);
+          console.log("Added Aadhar!");
         })
         .catch(error => console.error("Error:", error));
     }

@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
-import '../../components/Translations/translations';
-import { useTranslation } from 'react-i18next';
 
 const SignaturePage: React.FC = () => {
   const { t } = useTranslation();
@@ -11,12 +9,13 @@ const SignaturePage: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const navigate = useNavigate();
-
+  
+  const data = auth.currentUser
   const handleSaveAndContinue = () => {
     navigate('/signature');
   };
 
-  const handleCapture = () => {
+  const handleCapture = async () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
     if (video && canvas) {
@@ -37,7 +36,13 @@ const SignaturePage: React.FC = () => {
         tracks.forEach(track => track.stop());
 
         const imageDataUrl = canvas.toDataURL('image/png');
+        // console.log(imageDataUrl);
+        const docPrev = doc(db, "PersonalDetails", data.email);
+        var docSnap:any = await getDoc(docPrev);
+        var curr = (await docSnap.data()) || {};
         setCapturedImage(imageDataUrl);
+        curr["image"] = capturedImage
+        await setDoc(doc(db, "PersonalDetails", data.email), curr);
       }
     }
   };

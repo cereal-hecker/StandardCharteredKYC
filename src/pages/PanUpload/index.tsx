@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
 import extractTextAndSearchPattern from '../../components/OCR/ocr'
-import '../../components/Translations/translations';
-import { useTranslation } from 'react-i18next';
 
 const PanPage: React.FC = () => {
   const { t } = useTranslation();
@@ -12,6 +10,8 @@ const PanPage: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const navigate = useNavigate();
+  const data = auth.currentUser
+  console.log(data);
 
   const handleSaveAndContinue = () => {
     navigate('/signature');
@@ -19,8 +19,15 @@ const PanPage: React.FC = () => {
   useEffect(() => {
     if (capturedImage) {
       extractTextAndSearchPattern(capturedImage, "pan")
-        .then(matchedText => {
+        .then(async (matchedText) => {
           console.log("Matched Text:", matchedText);
+          const docPrev = doc(db, "PersonalDetails", data.email);
+          var docSnap:any = await getDoc(docPrev);
+          var curr = (await docSnap.data()) || {};
+
+          curr["pan_card"] = matchedText
+          await setDoc(doc(db, "PersonalDetails", data.email), curr);
+          console.log("Added Pan Card!");
         })
         .catch(error => console.error("Error:", error));
     }
