@@ -1,85 +1,73 @@
 import React, { useEffect, useState } from 'react';
 import './LoginPage.css'; // Make sure this path is correct
 import { doSignInWithPhoneNumber } from '../firebase/auth'
-import OtpInputWithValidation from '../../components/otpInputBox/otpInput';
-import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+
+import { RecaptchaVerifier, signInWithPhoneNumber, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import {auth} from "../firebase/firebase";
 
 
 const LoginPage = () => {
-  const [isOtpStep, setIsOtpStep] = useState(false);
-  const [userInput, setUserInput] = useState('');
+  const [IsPasswordStep, setIsPasswordStep] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [checkOtp, setCheckOtp] = useState(false);
   const [phoneError, setPhoneError] = useState('');
 
   //firebase integration for login authentication
-  useEffect(()=>{
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-      { "size": "invisible" }
-    );
-  },[]);
+  // useEffect(()=>{
+  //   window.recaptchaVerifier = new RecaptchaVerifier(
+  //     "recaptcha-container",
+  //     { "size": "invisible" }
+  //   );
+  // },[]);
 
-  const validatePhone = () =>{
-    var regexp = /^\+[0-9]?()[0-9](\s|\S)(\d[0-9]{8,16})$/;
-    return regexp.test(userInput)
-  }
-
-  const handlePhoneNumberSubmit = (e) => {
+  const handlePhoneNumberSubmit = async (e) => {
     e.preventDefault();
-    // Simple validation for a 10-digit phone number
-    if (validatePhone()) {
-      const appVerifier = window.recaptchaVerfier;
-      signInWithPhoneNumber(auth, userInput, appVerifier)
-      .then(value => {
-        
-      })
-
-    } else {
-      setPhoneError('Please enter a valid 10-digit phone number.');
-      return; // Prevent submission if validation fails
-    }
-    // Reset error state if validation passes
-    setPhoneError('');
-
-
-
-    console.log('Phone number submitted:', userInput);
-    setIsOtpStep(true); // Move to OTP step
+    setIsPasswordStep(true);
   };
 
-  const handleOtpSubmit = (e) => {
+  const handleOtpSubmit = async(e) => {
     e.preventDefault();
-    setCheckOtp(true);
-    console.log('OTP submitted:', userInput);
-    // OTP submission logic here
+    try{
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      console.log("Logged In Successfully");
+      console.log(auth.currentUser);
+    } catch(e){
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("New Account Created!");
+    }
+
+
   };
 
   return (
     <div className="login-page">
-      <form onSubmit={isOtpStep ? handleOtpSubmit : handlePhoneNumberSubmit}>
-        {isOtpStep ? (
+      <form onSubmit={IsPasswordStep ? handleOtpSubmit : handlePhoneNumberSubmit}>
+        {IsPasswordStep ? (
           <div>
-            <h1>Enter Your One Time Password</h1>
-            <OtpInputWithValidation
-              numberOfDigits={6}
-              checkOtp={checkOtp}
+            <h1>Enter Your Password</h1>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your Password"
             />
           </div>
         ) : (
           <div>
-            <h1>Enter Your Phone Number</h1>
+            <h1>Enter Your Email</h1>
             <input
-              type="tel"
-              id="phone-number"
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Enter your phone number"
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
             />
             {phoneError && <div className="phone-error">{phoneError}</div>} {/* Conditional rendering */}
           </div>
         )}
-        <button type="submit" disabled={isOtpStep ? false : userInput.trim().length !== 10 || isNaN(userInput)}>{isOtpStep ? 'Submit OTP' : 'Continue'}</button>
+        <button type="submit" >{IsPasswordStep ? 'Submit OTP' : 'Continue'}</button>
       </form>
     </div>
   );
