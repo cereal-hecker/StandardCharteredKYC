@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-import Progress from './components/ProgressBar';
 import PersonalDetails from './pages/PersonalDetails';
+import Progress from './components/ProgressBar';
 import AadhaarUpload from './pages/AadhaarUpload';
 import PanPage from './pages/PanUpload';
 import SignaturePage from './pages/SignatureUpload';
@@ -14,7 +13,8 @@ export default function App() {
       <div className="App">
         <Progress />
         <Routes>
-          <Route path="/" element={<PersonalDetails />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/home" element={<PersonalDetails />} />
           <Route path="/aadharcard" element={<AadhaarUpload />} />
           <Route path="/pancard" element={<PanPage />} />
           <Route path="/signature" element={<SignaturePage />} />

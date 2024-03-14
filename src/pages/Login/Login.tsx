@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './LoginPage.css'; // Make sure this path is correct
-
 import { RecaptchaVerifier, signInWithPhoneNumber, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import {auth} from "../firebase/firebase";
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phoneError, setPhoneError] = useState('');
+
 
   const handlePhoneNumberSubmit = async (e) => {
     e.preventDefault();
@@ -52,12 +53,12 @@ const LoginPage = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder="Enter your Email"
             />
             {phoneError && <div className="phone-error">{phoneError}</div>} {/* Conditional rendering */}
           </div>
         )}
-        <button type="submit" >{IsPasswordStep ? 'Submit OTP' : 'Continue'}</button>
+        <button type="submit" >{IsPasswordStep ? 'Login' : 'Continue'}</button>
       </form>
     </div>
   );
