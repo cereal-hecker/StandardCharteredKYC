@@ -14,6 +14,8 @@ const AadhaarPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  const [ocrError, setOcrError] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSaveAndContinue = () => {
@@ -23,6 +25,9 @@ const AadhaarPage: React.FC = () => {
   console.log(data);
 
   useEffect(() => {
+    // Reset OCR error state whenever a new image is captured
+    setOcrError(false);
+  
     if (capturedImage) {
       extractTextAndSearchPattern(capturedImage, "aadhar")
         .then(async (matchedText) => {
@@ -34,11 +39,12 @@ const AadhaarPage: React.FC = () => {
           await setDoc(doc(db, "PersonalDetails", data.email), curr);
           console.log("Added Aadhar!");
         })
-        .catch(error => console.error("Error:", error));
+        .catch(error => {
+          console.error("Error:", error);
+          setOcrError(true); // Set OCR error state to true on failure
+        });
     }
   }, [capturedImage]);
-
-
   
 
   const handleCapture = () => {
@@ -86,23 +92,24 @@ const AadhaarPage: React.FC = () => {
 
   return (
     <div className="flex px-16 pt-20 gap-10">
-    <div className='w-1/2'>
-      <div className="flex items-center justify-around">
-        {capturedImage ? (
-          <img src={capturedImage} alt="Captured frame" className="border-3 border-gray-300 rounded-md" />
-        ) : (
-          <CameraFeed videoRef={videoRef} />
-        )}
+      <div className='w-1/2'>
+        <div className="flex items-center justify-around">
+          {capturedImage ? (
+            <img src={capturedImage} alt="Captured frame" className="border-3 border-gray-300 rounded-md" />
+          ) : (
+            <CameraFeed videoRef={videoRef} />
+          )}
+        </div>
       </div>
-    </div>
-    <div className='w-1/2'>
-    <h1 className="text-4xl font-bold mb-4">{t('Aadhaar Card Upload')}</h1>
-      <h2 className="mx-auto">{t('Place your aadhaar card inside the rectangle')}</h2>
-      <div className="flex flex-col gap-2 mt-20">
+      <div className='w-1/2'>
+        <h1 className="text-4xl font-bold mb-4">{t('Aadhaar Card Upload')}</h1>
+        <h2 className="mx-auto">{t('Place your aadhaar card inside the rectangle')}</h2>
+        {ocrError && <h2 className="mx-auto">{t('Aadhaar card was not detected, retake the photo')}</h2>}
+        <div className="flex flex-col gap-2 mt-20">
           {capturedImage ? (
             <>
               <button onClick={handleRetake} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{t('Retake')}</button>
-              <button onClick={handleSaveAndContinue} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{t('Save and continue')}</button>
+              {ocrError? null:<button onClick={handleSaveAndContinue} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{t('Save and continue')}</button>}
             </>
           ) : (
             <button onClick={handleCapture} className="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{t('Capture Frame')}</button>
