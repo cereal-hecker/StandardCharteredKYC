@@ -14,7 +14,7 @@ export default function App() {
         <Progress />
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/home" element={<PersonalDetails />} />
+          <Route path="/personaldetails" element={<PersonalDetails />} />
           <Route path="/aadharcard" element={<AadhaarUpload />} />
           <Route path="/pancard" element={<PanPage />} />
           <Route path="/signature" element={<SignaturePage />} />

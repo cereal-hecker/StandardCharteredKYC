@@ -28,7 +28,7 @@ const LoginPage = () => {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("New Account Created!");
     }
-    navigate('/')
+    navigate('/personaldetails')
   };
 
   return (
