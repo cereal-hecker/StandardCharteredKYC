@@ -61,15 +61,11 @@ const LoginPage = () => {
       <div className="flex flex-col md:flex-row md:space-x-8 w-full h-full">
         <div className="w-1/2 bg-blue-200 h-full flex flex-col justify-center items-center">
         <div className="mt-10 mb-8 top-0 left-0">
-            {/* <img
-              src="/assets/images/logo.svg"
-              alt="Standard Chartered"
-              className="h-12"
-            /> */}
           </div>
-          <h1 className="text-3xl font-bold mt-4">
-          {t('Your portal for Online KYC')}
+          <h1 className="text-3xl mt-4 font-bold">
+          {t("Standard Chartered's")}<p className="inline text-green-900">{t(' KYC ')}</p>{t('portal')}
           </h1>
+          <p className="text-lg w-[500px] mt-4 text-center">{t('Streamline your identity verification process with our secure and efficient online KYC solution.')}</p>
           <img
             src="/assets/images/video.png"
             alt="Online KYC"
@@ -82,25 +78,25 @@ const LoginPage = () => {
         >
           {IsPasswordStep ? (
             <div>
-              <h1 className="text-xl font-bold">{t('Enter Your Password')}</h1>
+              <h1 className="text-xl font-bold">{t('Enter your password')}</h1>
               <input
                 type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your Password"
+                placeholder={t('Enter your password')}
                 className="w-full py-2 px-4 mt-2 border border-gray-300 rounded-md"
               />
             </div>
           ) : (
             <div>
-              <h1 className="text-xl font-bold">{t('Enter Your Email')}</h1>
+              <h1 className="text-xl font-bold">{t('Enter your email')}</h1>
               <input
                 type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your Email"
+                placeholder={t("Enter your email")}
                 className="w-full py-2 px-4 mt-2 border border-gray-300 rounded-md"
               />
               {phoneError && <div className="text-red-500">{phoneError}</div>}{" "}
