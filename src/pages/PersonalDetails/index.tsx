@@ -3,8 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import TextFieldCustom from '../../components/TextField';
 import '../../components/Translations/translations';
-import {auth} from "../firebase/firebase";
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
+import {app, auth} from "../firebase/firebase";
+import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
+
+const db = getFirestore(app);
+const data = auth.currentUser;
+
 
 export default function PersonalDetails() {
     const { t } = useTranslation();
@@ -60,10 +65,15 @@ export default function PersonalDetails() {
         }
       };
 
-    const handleSaveAndContinue = () => {
-        console.log("First Name:", firstName);
-        console.log("Last Name:", lastName);
-        console.log("Email:", email);
+    const handleSaveAndContinue = async () => {
+        const docPrev = doc(db, "PersonalDetails", data.email);
+        var docSnap:any = await getDoc(docPrev);
+        var curr = (await docSnap.data()) || {};
+        curr["first_name"] = firstName;
+        curr["last_name"] = lastName;
+        curr["phone_number"] = phoneNumber;
+        curr["image"] = capturedImage;
+        await setDoc(doc(db, "PersonalDetails", data.email), curr);
         navigate('/aadharcard');
     };
 

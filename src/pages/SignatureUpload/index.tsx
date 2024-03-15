@@ -47,7 +47,7 @@ const SignaturePage: React.FC = () => {
         var docSnap:any = await getDoc(docPrev);
         var curr = (await docSnap.data()) || {};
         setCapturedImage(imageDataUrl);
-        curr["image"] = imageDataUrl;
+        curr["signature"] = imageDataUrl;
         await setDoc(doc(db, "PersonalDetails", data.email), curr);
       }
     }
