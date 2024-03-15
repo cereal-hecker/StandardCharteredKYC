@@ -1,18 +1,17 @@
 import {app, auth} from "../firebase/firebase";
-import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
+import { getFirestore, getDoc, setDoc, doc, } from "firebase/firestore";
+import { signOut,sendEmailVerification } from "firebase/auth";
 
 const db = getFirestore(app);
 export default function DonePage() {
 
 
     const handleUpdate = async () => {
-        const docPrev = doc(db, "PersonalDetails", data.email);
-        var docSnap:any = await getDoc(docPrev);
-        var curr = (await docSnap.data()) || {};
-        curr["verified"] = "true";
-        await setDoc(doc(db, "PersonalDetails", data.email), curr);
+        sendEmailVerification(auth.currentUser);
+        await signOut(auth);
     };
     var data = auth.currentUser;
+    handleUpdate();
 
     return (
         <div className="flex justify-center items-center pt-[300px]">

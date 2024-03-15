@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import TranslateButton from '../../components/Translations/translateButton';
 
 const LoginPage = () => {
+  auth.languageCode = 'it';
   const { t } = useTranslation();
 
   const [IsPasswordStep, setIsPasswordStep] = useState(false);
@@ -17,9 +18,10 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const navigate = useNavigate();
+  const data = auth.currentUser;
 
-  if (auth.currentUser != null)
-  navigate("/personaldetails");
+  if (data != null)
+    navigate("/personaldetails");
 
   const handlePhoneNumberSubmit = async (e) => {
     e.preventDefault();

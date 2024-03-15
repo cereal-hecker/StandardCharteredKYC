@@ -22,26 +22,23 @@ const AadhaarPage: React.FC = () => {
     navigate('/pancard');
   };
   const data = auth.currentUser
-  console.log(data);
 
   useEffect(() => {
-    // Reset OCR error state whenever a new image is captured
-    setOcrError(false);
-  
     if (capturedImage) {
       extractTextAndSearchPattern(capturedImage, "aadhar")
-        .then(async (matchedText) => {
-          console.log("Matched Text:", matchedText);
-          const docPrev = doc(db, "PersonalDetails", data.email);
-          var docSnap:any = await getDoc(docPrev);
-          var curr = (await docSnap.data()) || {};
-          curr["aadhar_card"] = matchedText
-          await setDoc(doc(db, "PersonalDetails", data.email), curr);
-          console.log("Added Aadhar!");
+      .then(async (matchedText) => {
+        console.log("Matched Text:", matchedText);
+        const docPrev = doc(db, "PersonalDetails", data.email);
+        var docSnap:any = await getDoc(docPrev);
+        var curr = (await docSnap.data()) || {};
+        curr["aadhar_card"] = matchedText
+        await setDoc(doc(db, "PersonalDetails", data.email), curr);
+        console.log("Added Aadhar!");
+        setOcrError(false);
         })
         .catch(error => {
           console.error("Error:", error);
-          setOcrError(true); // Set OCR error state to true on failure
+          setOcrError(true)
         });
     }
   }, [capturedImage]);

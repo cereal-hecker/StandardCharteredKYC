@@ -8,7 +8,7 @@
 - Interactive e-KYC
 - Translation for better accessibility
 - Real-time checking of Adhaar and Pan
-
+- Verhoeff Algorithm used to Verify Aadhar
   
 ## Demo Video
 https://github.com/cereal-hecker/StandardCharteredKYC/assets/27121364/1f2d6b7b-8852-456e-a7ac-5e61e6a8cedb
