@@ -8,17 +8,17 @@ import {app, auth} from "../firebase/firebase";
 import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
 
 const db = getFirestore(app);
-const data = auth.currentUser;
 
 
 export default function PersonalDetails() {
-    const { t } = useTranslation();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState(data.email);
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const navigate = useNavigate();
-    const videoRef = useRef<HTMLVideoElement>(null);
+  const { t } = useTranslation();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const data = auth.currentUser;
+  const [email, setEmail] = useState(data.email);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const navigate = useNavigate();
+  const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
 

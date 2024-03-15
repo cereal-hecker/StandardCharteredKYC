@@ -4,13 +4,15 @@ import { signOut,sendEmailVerification } from "firebase/auth";
 
 const db = getFirestore(app);
 export default function DonePage() {
-
+    
+    const data = auth.currentUser;
 
     const handleUpdate = async () => {
-        sendEmailVerification(auth.currentUser);
+        if (data.emailVerified != true){
+            await sendEmailVerification(data);
+        }
         await signOut(auth);
     };
-    var data = auth.currentUser;
     handleUpdate();
 
     return (
