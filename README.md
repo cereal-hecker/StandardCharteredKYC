@@ -13,3 +13,37 @@
 ## Demo Video
 https://github.com/cereal-hecker/StandardCharteredKYC/assets/27121364/1f2d6b7b-8852-456e-a7ac-5e61e6a8cedb
 
+  <h2>Team Members</h2>
+    <table style="display: inline-table;">
+        <tr>
+            <td>
+                <img src="https://avatars.githubusercontent.com/u/27121364?v=4" alt="Avya Rathod" width="80" style="border-radius: 50%;">
+            </td>
+            <td>
+                <img src="https://avatars.githubusercontent.com/u/66690978?v=4" alt="Nikhil Ivannan" width="80" style="border-radius: 50%;">
+            </td>
+            <td>
+                <img src="https://avatars.githubusercontent.com/u/91269087?v=4" alt="Riya Batla" width="80" style="border-radius: 50%;">
+            </td>
+            <td>
+                <img src="https://avatars.githubusercontent.com/u/92009976?v=4" alt="Ritesh Mishra" width="80" style="border-radius: 50%;">
+            </td>
+            <td>
+                <img src="https://avatars.githubusercontent.com/u/115419831?v=4" alt="Shivesh Rathore" width="80" style="border-radius: 50%;">
+            </td>
+        </tr>
+        <tr>
+            <td>Avya Rathod</td>
+            <td>Nikhil Ivannan</td>
+            <td>Riya Batla</td>
+            <td>Ritesh Mishra</td>
+            <td>Shivesh Rathore</td>
+        </tr>
+        <tr>
+            <td>Frontend</td>
+            <td>Full Stack and <br>read documentation</td>
+            <td>Frontend</td>
+            <td>OCR Implementation<br> and Backend</td>
+            <td>Frontend</td>
+        </tr>
+    </table>
