@@ -15,7 +15,7 @@ export default function PersonalDetails() {
     const { t } = useTranslation();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState(auth.currentUser.email);
+    const [email, setEmail] = useState(data.email);
     const [phoneNumber, setPhoneNumber] = useState('');
     const navigate = useNavigate();
     const videoRef = useRef<HTMLVideoElement>(null);
