@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import TranslateButton from '../../components/Translations/translateButton';
 
 const LoginPage = () => {
-  auth.languageCode = 'it';
+
   const { t } = useTranslation();
 
   const [IsPasswordStep, setIsPasswordStep] = useState(false);

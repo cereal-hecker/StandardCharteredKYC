@@ -18,7 +18,7 @@ export default function DonePage() {
 
     return (
         <div className="flex justify-center items-center text-center pt-[250px] w-full">
-            <h2 className="text-3xl w-[600px] font-semibold"><div className="pb-4">{t('Congratulations!')}</div>{('Your KYC process has been successfully completed. Please check your email for further instructions.')}</h2>
+            <h2 className="text-3xl w-[600px] font-semibold"><div className="pb-4">{t('Congratulations!')}</div>{((t('Your KYC process has been successfully completed. Please check your email for further instructions.')))}</h2>
         </div>
     )
 }
