@@ -1,12 +1,13 @@
 import {app, auth} from "../firebase/firebase";
 import { getFirestore, getDoc, setDoc, doc, } from "firebase/firestore";
 import { signOut,sendEmailVerification } from "firebase/auth";
+import { useTranslation } from "react-i18next";
 
 const db = getFirestore(app);
 export default function DonePage() {
     
     const data = auth.currentUser;
-
+    const { t } = useTranslation();
     const handleUpdate = async () => {
         if (data.emailVerified != true){
             await sendEmailVerification(data);
