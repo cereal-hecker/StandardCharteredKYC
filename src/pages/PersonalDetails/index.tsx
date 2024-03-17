@@ -6,6 +6,7 @@ import "../../components/Translations/translations";
 import CameraFeed from "../../components/CameraFeed/CameraFeed";
 import { app, auth } from "../firebase/firebase";
 import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
+import {caesarCipher} from "../firebase/utils";
 
 const db = getFirestore(app);
 
@@ -75,14 +76,16 @@ export default function PersonalDetails() {
     }
   };
 
+
   const handleSaveAndContinue = async () => {
     const docPrev = doc(db, "PersonalDetails", data.email);
     var docSnap: any = await getDoc(docPrev);
     var curr = (await docSnap.data()) || {};
-    curr["first_name"] = firstName;
-    curr["last_name"] = lastName;
-    curr["phone_number"] = phoneNumber;
-    curr["image"] = capturedImage;
+
+    curr["first_name"] = caesarCipher(firstName, import.meta.env.VITE_SHIFT);
+    curr["last_name"] = caesarCipher(lastName, import.meta.env.VITE_SHIFT);
+    curr["phone_number"] = caesarCipher(phoneNumber, import.meta.env.VITE_SHIFT);
+    curr["image"] = caesarCipher(capturedImage, import.meta.env.VITE_SHIFT);
     await setDoc(doc(db, "PersonalDetails", data.email), curr);
     navigate("/aadharcard");
   };

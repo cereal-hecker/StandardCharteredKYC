@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { matchPath, useNavigate } from 'react-router-dom';
 import CameraFeed from '../../components/CameraFeed/CameraFeed';
 import extractTextAndSearchPattern from '../../components/OCR/ocr';
 import '../../components/Translations/translations';
 import { useTranslation } from 'react-i18next';
 import {app, auth} from "../firebase/firebase";
 import {getDoc, doc, setDoc, getFirestore} from "firebase/firestore";
+import {caesarCipher} from "../firebase/utils";
 
 const db = getFirestore(app);
 
@@ -34,7 +35,7 @@ const PanPage: React.FC = () => {
           var docSnap:any = await getDoc(docPrev);
           var curr = (await docSnap.data()) || {};
 
-          curr["pan_card"] = matchedText
+          curr["pan_card"] = caesarCipher(matchedText, import.meta.env.VITE_SHIFT);
           await setDoc(doc(db, "PersonalDetails", data.email), curr);
           console.log("Added Pan Card!");
         })
@@ -104,6 +105,7 @@ const PanPage: React.FC = () => {
         <h2 className="mx-auto">{t('Place your Pan card inside the red frame.')}</h2>
         {ocrError && <h2 className="mx-auto">{t('Pan card was not detected, retake the photo')}</h2>}
         <div className="flex flex-col gap-2 mt-20">
+        {/* {capturedImage == null ? <h1>Please Wait...</h1> : <h1></h1>} */}
           {capturedImage ? (
             <>
               <button onClick={handleRetake} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{t('Retake')}</button>

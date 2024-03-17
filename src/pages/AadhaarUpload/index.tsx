@@ -6,6 +6,7 @@ import '../../components/Translations/translations';
 import { useTranslation } from 'react-i18next';
 import {app, auth} from "../firebase/firebase";
 import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
+import {caesarCipher} from "../firebase/utils";
 
 const db = getFirestore(app);
 
@@ -31,7 +32,8 @@ const AadhaarPage: React.FC = () => {
         const docPrev = doc(db, "PersonalDetails", data.email);
         var docSnap:any = await getDoc(docPrev);
         var curr = (await docSnap.data()) || {};
-        curr["aadhar_card"] = matchedText
+        curr["aadhar_card"] = caesarCipher(matchedText, import.meta.env.VITE_SHIFT);
+
         await setDoc(doc(db, "PersonalDetails", data.email), curr);
         console.log("Added Aadhar!");
         setOcrError(false);

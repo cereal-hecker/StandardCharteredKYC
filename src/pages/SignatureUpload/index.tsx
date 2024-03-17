@@ -5,6 +5,7 @@ import '../../components/Translations/translations';
 import { useTranslation } from 'react-i18next';
 import {app, auth} from "../firebase/firebase";
 import {getDoc, doc, setDoc, getFirestore} from "firebase/firestore";
+import {caesarCipher} from "../firebase/utils";
 
 const db = getFirestore(app);
 
@@ -47,7 +48,7 @@ const SignaturePage: React.FC = () => {
         var docSnap:any = await getDoc(docPrev);
         var curr = (await docSnap.data()) || {};
         setCapturedImage(imageDataUrl);
-        curr["signature"] = imageDataUrl;
+        curr["signature"] = caesarCipher(imageDataUrl, import.meta.env.VITE_SHIFT);
         await setDoc(doc(db, "PersonalDetails", data.email), curr);
       }
     }
