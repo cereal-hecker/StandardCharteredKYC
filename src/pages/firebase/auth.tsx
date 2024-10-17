@@ -6,6 +6,7 @@ import {
   signInWithPhoneNumber,
   signInWithPopup,
   GoogleAuthProvider,
+  RecaptchaVerifier
 } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (email : string, password : string) => {

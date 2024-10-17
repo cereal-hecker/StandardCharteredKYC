@@ -13,6 +13,14 @@ services:
       context: .
     environment:
       NODE_ENV: production
+      VITE_APIKEY: ${VITE_APIKEY}
+      VITE_AUTHDOMAIN: ${VITE_AUTHDOMAIN}
+      VITE_PROJECTID: ${VITE_PROJECTID}
+      VITE_STORAGEBUCKET: ${VITE_STORAGEBUCKET}
+      VITE_MESSAGINGSENDERID: ${VITE_MESSAGINGSENDERID}
+      VITE_APPID: ${VITE_APPID}
+      VITE_SHIFT: 4
+      PORT: ${PORT}
     ports:
       - 3000:3000
 

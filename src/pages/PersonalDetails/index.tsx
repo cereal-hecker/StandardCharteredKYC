@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import TextFieldCustom from "../../components/TextField";
@@ -14,7 +14,7 @@ export default function PersonalDetails() {
   const { t } = useTranslation();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const data = auth.currentUser;
+  const data : any = auth.currentUser;
   const [email, setEmail] = useState(data.email);
   const [phoneNumber, setPhoneNumber] = useState("");
   const navigate = useNavigate();
